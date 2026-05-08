@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Friends of Fort Getty Park</title>
+    <meta name="description" content="Friends of Fort Getty Park welcomes neighbors who care about preserving, improving, and celebrating Fort Getty Park.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Friends of Fort Getty Park home">
+        <span class="brand-mark">FG</span>
+        <span>Friends of Fort Getty Park</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="leadership.html">Founding Friends</a>
+        <a class="nav-action" href="#signup">Join the List</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="comparison-hero" data-comparison>
+          <img class="comparison-image future-image" src="assets/future-park-v3.png" alt="A proposed future vision for Fort Getty Park with more trees, paths, gathering spaces, two modest one-story buildings, and public amenities">
+          <div class="comparison-before">
+            <img class="comparison-image current-image" src="assets/current-park.jpg" alt="The current aerial view of Fort Getty Park">
+          </div>
+          <div class="comparison-divider" aria-hidden="true"></div>
+          <input class="comparison-range" type="range" min="0" max="100" value="82" aria-label="Compare current Fort Getty Park with a possible future vision">
+          <div class="comparison-label current">Current park</div>
+          <div class="comparison-label future">Possible future</div>
+        </div>
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <h1>Welcome to Friends of Fort Getty Park</h1>
+          <p class="hero-copy">We are neighbors looking to engage the entire Jamestown community in a creative discussion about the future of our best public park. Please join the conversation.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#signup">Sign up for updates</a>
+            <a class="button secondary" href="leadership.html">Meet the Founding Friends</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro-section" aria-labelledby="mission-heading">
+        <div class="section-inner two-column">
+          <div>
+            <p class="eyebrow dark">Our purpose</p>
+            <h2 id="mission-heading">Protecting a park that belongs to the whole community.</h2>
+          </div>
+          <div class="body-copy">
+            <p>Friends of Fort Getty Park is forming an email list for neighbors, visitors, and supporters who want practical updates about the park, public meetings, volunteer opportunities, and ways to help.</p>
+            <p>This first website is intentionally focused: welcome people, gather interest, and make the group easy to contact while the organization grows.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="focus-section" aria-label="Community priorities">
+        <div class="section-inner focus-grid">
+          <article>
+            <h3>Stay informed</h3>
+            <p>Receive clear updates about public conversations, planning milestones, and important town decisions related to Fort Getty Park.</p>
+          </article>
+          <article>
+            <h3>Share ideas</h3>
+            <p>Help surface community hopes, concerns, memories, and priorities so park conversations remain thoughtful and inclusive.</p>
+          </article>
+          <article>
+            <h3>Pitch in</h3>
+            <p>Learn about volunteer efforts, events, and simple ways to support stewardship of the park over time.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="signup" class="signup-section" aria-labelledby="signup-heading">
+        <div class="section-inner signup-layout">
+          <div>
+            <p class="eyebrow dark">Email list</p>
+            <h2 id="signup-heading">Sign up for Friends of Fort Getty Park updates.</h2>
+            <p class="body-copy">Share your contact information, tell us whether you would like to volunteer, and add a few thoughts about what you would like to see at Fort Getty Park.</p>
+          </div>
+
+          <form class="signup-form" id="signupForm">
+            <label>
+              <span>Name</span>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+            </label>
+            <label>
+              <span>Jamestown street address</span>
+              <input id="address" name="address" type="text" autocomplete="street-address" placeholder="Street address only" required>
+            </label>
+            <label>
+              <span>Email</span>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </label>
+            <label>
+              <span>Phone <em>(optional)</em></span>
+              <input id="phone" name="phone" type="tel" autocomplete="tel">
+            </label>
+            <label>
+              <span>What would you like to see at Fort Getty Park?</span>
+              <textarea id="parkIdeas" name="parkIdeas" rows="5" aria-describedby="ideaExamples" required></textarea>
+            </label>
+            <p class="example-note" id="ideaExamples">Examples: open space, playground, picnic area, boat storage, swimming pier</p>
+            <label class="checkbox-field">
+              <input id="volunteer" name="volunteer" type="checkbox">
+              <span>Would you like to volunteer?</span>
+            </label>
+            <button class="button primary" type="submit">Join the conversation</button>
+            <p class="form-note">Temporary signup email: <a href="mailto:hello@friendsoffortgettypark.com">hello@friendsoffortgettypark.com</a></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Friends of Fort Getty Park</p>
+      <a href="mailto:hello@friendsoffortgettypark.com">hello@friendsoffortgettypark.com</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
