@@ -226,6 +226,13 @@ a {
   pointer-events: auto;
 }
 
+.hero-press-action {
+  position: absolute;
+  z-index: 9;
+  right: clamp(22px, 7vw, 94px);
+  bottom: clamp(72px, 12vh, 136px);
+}
+
 .eyebrow {
   margin: 0 0 14px;
   font-size: 0.78rem;
@@ -560,6 +567,15 @@ h3 {
 
   .hero-content {
     margin: 96px auto 0;
+  }
+
+  .hero-press-action {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    z-index: 9;
+    width: min(720px, calc(100% - 36px));
+    margin: 18px auto 0;
   }
 
   .hero h1 {
