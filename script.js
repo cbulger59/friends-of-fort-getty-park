@@ -12,6 +12,10 @@ const signupConfig = {
   ...window.FFGP_SIGNUP_CONFIG,
 };
 
+if (!window.location.hash) {
+  window.addEventListener("load", () => window.scrollTo(0, 0));
+}
+
 if (form) {
   const formStatus = document.querySelector("#formStatus");
   const volunteerCheckbox = document.querySelector("#volunteer");
