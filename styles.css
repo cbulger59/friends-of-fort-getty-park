@@ -305,6 +305,7 @@ h3 {
 .intro-section,
 .leaders-section,
 .signup-section,
+.press-section,
 .focus-section,
 .page-hero,
 .contact-band {
@@ -322,6 +323,7 @@ h3 {
 
 .intro-section h2,
 .signup-section h2,
+.press-section h2,
 .page-hero h1,
 .contact-band h2 {
   font-size: clamp(2rem, 4.5vw, 4.3rem);
@@ -380,6 +382,10 @@ h3 {
 
 .signup-section {
   background: var(--paper);
+}
+
+.press-section {
+  background: #eef3ee;
 }
 
 .signup-form {

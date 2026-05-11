@@ -1,8 +1,10 @@
 const form = document.querySelector("#signupForm");
+const pressForm = document.querySelector("#pressForm");
 const comparison = document.querySelector("[data-comparison]");
 const signupConfig = {
   provider: "email",
   mailto: "hello@friendsoffortgettypark.com",
+  pressMailto: "caroline.s.niemczyk@gmail.com",
   action: "",
   method: "post",
   target: "_blank",
@@ -80,6 +82,36 @@ if (form) {
 
     if (formStatus) {
       formStatus.textContent = "Opening an email draft with your signup details.";
+    }
+
+    window.location.href = mailto;
+  });
+}
+
+if (pressForm) {
+  const pressStatus = document.querySelector("#pressStatus");
+
+  pressForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const name = document.querySelector("#pressName").value.trim();
+    const email = document.querySelector("#pressEmail").value.trim();
+    const phone = document.querySelector("#pressPhone").value.trim();
+    const outlet = document.querySelector("#pressOutlet").value.trim();
+    const body = [
+      "Press inquiry for Friends of Fort Getty Park.",
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      phone ? `Phone: ${phone}` : "Phone: Not provided",
+      `Publication or Outlet: ${outlet}`,
+    ].filter(Boolean).join("\n");
+
+    const pressMailto = signupConfig.pressMailto || signupConfig.mailto;
+    const mailto = `mailto:${pressMailto}?subject=${encodeURIComponent("Friends of Fort Getty Park press inquiry")}&body=${encodeURIComponent(body)}`;
+
+    if (pressStatus) {
+      pressStatus.textContent = "Opening an email draft with your press inquiry.";
     }
 
     window.location.href = mailto;
