@@ -15,7 +15,7 @@
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="index.html" aria-current="page">Home</a>
-        <a href="leadership.html">Founding Friends</a>
+        <a href="leadership.html">Friends</a>
         <a class="nav-action" href="#signup">Join the List</a>
       </nav>
     </header>
@@ -37,8 +37,8 @@
           <h1>Welcome to Friends of Fort Getty Park</h1>
           <p class="hero-copy">We are neighbors looking to engage the entire Jamestown community in a creative discussion about the future of our best public park. Please join the conversation.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#signup">Sign up for updates</a>
-            <a class="button secondary" href="leadership.html">Meet the Founding Friends</a>
+            <a class="button primary" href="#signup">Sign up to join the conversation</a>
+            <a class="button secondary" href="leadership.html">Meet your Friends</a>
           </div>
         </div>
       </section>
@@ -81,34 +81,36 @@
             <p class="body-copy">Share your contact information, tell us whether you would like to volunteer, and add a few thoughts about what you would like to see at Fort Getty Park.</p>
           </div>
 
-          <form class="signup-form" id="signupForm">
+          <form class="signup-form" id="signupForm" data-signup-form>
             <label>
               <span>Name</span>
-              <input id="name" name="name" type="text" autocomplete="name" required>
+              <input id="name" name="name" data-signup-field="name" type="text" autocomplete="name" required>
             </label>
             <label>
               <span>Jamestown street address</span>
-              <input id="address" name="address" type="text" autocomplete="street-address" placeholder="Street address only" required>
+              <input id="address" name="address" data-signup-field="address" type="text" autocomplete="street-address" placeholder="Street address only" required>
             </label>
             <label>
               <span>Email</span>
-              <input id="email" name="email" type="email" autocomplete="email" required>
+              <input id="email" name="email" data-signup-field="email" type="email" autocomplete="email" required>
             </label>
             <label>
               <span>Phone <em>(optional)</em></span>
-              <input id="phone" name="phone" type="tel" autocomplete="tel">
+              <input id="phone" name="phone" data-signup-field="phone" type="tel" autocomplete="tel">
             </label>
             <label>
               <span>What would you like to see at Fort Getty Park?</span>
-              <textarea id="parkIdeas" name="parkIdeas" rows="5" aria-describedby="ideaExamples" required></textarea>
+              <textarea id="parkIdeas" name="parkIdeas" data-signup-field="parkIdeas" rows="5" aria-describedby="ideaExamples" required></textarea>
             </label>
             <p class="example-note" id="ideaExamples">Examples: open space, playground, picnic area, boat storage, swimming pier</p>
             <label class="checkbox-field">
-              <input id="volunteer" name="volunteer" type="checkbox">
+              <input id="volunteer" type="checkbox">
               <span>Would you like to volunteer?</span>
             </label>
+            <input id="volunteerValue" name="volunteer" data-signup-field="volunteer" type="hidden" value="No">
             <button class="button primary" type="submit">Join the conversation</button>
-            <p class="form-note">Temporary signup email: <a href="mailto:hello@friendsoffortgettypark.com">hello@friendsoffortgettypark.com</a></p>
+            <p class="form-status" id="formStatus" aria-live="polite"></p>
+            <p class="form-note">Questions? Email <a href="mailto:hello@friendsoffortgettypark.com">hello@friendsoffortgettypark.com</a></p>
           </form>
         </div>
       </section>
@@ -119,6 +121,7 @@
       <a href="mailto:hello@friendsoffortgettypark.com">hello@friendsoffortgettypark.com</a>
     </footer>
 
+    <script src="signup-config.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

@@ -343,8 +343,17 @@ h3 {
   gap: 18px;
 }
 
+.friend-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding-left: 0;
+  list-style: none;
+}
+
 .focus-grid article,
 .leader-card,
+.friend-list li,
 .signup-form {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -364,7 +373,8 @@ h3 {
 
 .focus-grid p,
 .leader-card p,
-.form-note {
+.form-note,
+.form-status {
   color: var(--muted);
 }
 
@@ -419,9 +429,19 @@ h3 {
 }
 
 .example-note,
-.form-note {
+.form-note,
+.form-status {
   margin: 0;
   font-size: 0.93rem;
+}
+
+.form-status:empty {
+  display: none;
+}
+
+.form-status {
+  color: var(--moss);
+  font-weight: 750;
 }
 
 .example-note {
@@ -442,6 +462,13 @@ h3 {
 
 .leader-card {
   padding: 28px;
+}
+
+.friend-list li {
+  padding: 18px 20px;
+  color: var(--ink);
+  font-size: 1.08rem;
+  font-weight: 800;
 }
 
 .headshot-placeholder {
@@ -537,7 +564,8 @@ h3 {
   .signup-layout,
   .contact-layout,
   .focus-grid,
-  .leader-grid {
+  .leader-grid,
+  .friend-list {
     grid-template-columns: 1fr;
   }
 

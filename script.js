@@ -1,15 +1,59 @@
 const form = document.querySelector("#signupForm");
 const comparison = document.querySelector("[data-comparison]");
+const signupConfig = {
+  provider: "email",
+  mailto: "hello@friendsoffortgettypark.com",
+  action: "",
+  method: "post",
+  target: "_blank",
+  fieldNames: {},
+  ...window.FFGP_SIGNUP_CONFIG,
+};
 
 if (form) {
+  const formStatus = document.querySelector("#formStatus");
+  const volunteerCheckbox = document.querySelector("#volunteer");
+  const volunteerValue = document.querySelector("#volunteerValue");
+  const providerReady = signupConfig.provider !== "email" && Boolean(signupConfig.action);
+
+  Object.entries(signupConfig.fieldNames || {}).forEach(([field, providerName]) => {
+    const input = form.querySelector(`[data-signup-field="${field}"]`);
+
+    if (input && providerName) {
+      input.name = providerName;
+    }
+  });
+
+  if (providerReady) {
+    form.action = signupConfig.action;
+    form.method = signupConfig.method || "post";
+
+    if (signupConfig.target) {
+      form.target = signupConfig.target;
+    }
+  }
+
   form.addEventListener("submit", (event) => {
+    const volunteer = volunteerCheckbox.checked ? "Yes" : "No";
+
+    if (volunteerValue) {
+      volunteerValue.value = volunteer;
+    }
+
+    if (providerReady) {
+      if (formStatus) {
+        formStatus.textContent = "Opening the signup confirmation in a new tab.";
+      }
+
+      return;
+    }
+
     event.preventDefault();
 
     const name = document.querySelector("#name").value.trim();
     const address = document.querySelector("#address").value.trim();
     const email = document.querySelector("#email").value.trim();
     const phone = document.querySelector("#phone").value.trim();
-    const volunteer = document.querySelector("#volunteer").checked ? "Yes" : "No";
     const parkIdeas = document.querySelector("#parkIdeas").value.trim();
     const body = [
       "Please add me to the Friends of Fort Getty Park contact list.",
@@ -24,7 +68,12 @@ if (form) {
       parkIdeas,
     ].filter(Boolean).join("\n");
 
-    const mailto = `mailto:hello@friendsoffortgettypark.com?subject=${encodeURIComponent("Friends of Fort Getty Park signup")}&body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:${signupConfig.mailto}?subject=${encodeURIComponent("Friends of Fort Getty Park signup")}&body=${encodeURIComponent(body)}`;
+
+    if (formStatus) {
+      formStatus.textContent = "Opening an email draft with your signup details.";
+    }
+
     window.location.href = mailto;
   });
 }
