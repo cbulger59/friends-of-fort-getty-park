@@ -66,8 +66,20 @@ if (form) {
 
     if (providerReady) {
       if (formStatus) {
-        formStatus.textContent = "Opening the signup confirmation in a new tab.";
+        formStatus.textContent = "Welcome to Friends of Fort Getty Park.";
       }
+
+      setTimeout(() => {
+        form.reset();
+
+        if (volunteerValue) {
+          volunteerValue.value = "No";
+        }
+
+        if (publicNameValue) {
+          publicNameValue.value = "No";
+        }
+      }, 500);
 
       return;
     }
