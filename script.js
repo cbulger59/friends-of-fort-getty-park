@@ -14,6 +14,8 @@ if (form) {
   const formStatus = document.querySelector("#formStatus");
   const volunteerCheckbox = document.querySelector("#volunteer");
   const volunteerValue = document.querySelector("#volunteerValue");
+  const publicNameCheckbox = document.querySelector("#publicName");
+  const publicNameValue = document.querySelector("#publicNameValue");
   const providerReady = signupConfig.provider !== "email" && Boolean(signupConfig.action);
 
   Object.entries(signupConfig.fieldNames || {}).forEach(([field, providerName]) => {
@@ -35,9 +37,14 @@ if (form) {
 
   form.addEventListener("submit", (event) => {
     const volunteer = volunteerCheckbox.checked ? "Yes" : "No";
+    const publicName = publicNameCheckbox.checked ? "Yes" : "No";
 
     if (volunteerValue) {
       volunteerValue.value = volunteer;
+    }
+
+    if (publicNameValue) {
+      publicNameValue.value = publicName;
     }
 
     if (providerReady) {
@@ -63,6 +70,7 @@ if (form) {
       `Email: ${email}`,
       phone ? `Phone: ${phone}` : "Phone: Not provided",
       `Would like to volunteer: ${volunteer}`,
+      `May list my name publicly on the Friends page: ${publicName}`,
       "",
       "What I would like to see at Fort Getty Park:",
       parkIdeas,

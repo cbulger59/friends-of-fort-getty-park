@@ -10,6 +10,7 @@ window.FFGP_SIGNUP_CONFIG = {
     email: "EMAIL",
     phone: "PHONE",
     volunteer: "VOLUNTEER",
+    publicName: "PUBLICNAME",
     parkIdeas: "PARKIDEAS",
   },
 };
