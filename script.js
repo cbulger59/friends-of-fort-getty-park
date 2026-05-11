@@ -13,7 +13,18 @@ const signupConfig = {
 };
 
 if (!window.location.hash) {
-  window.addEventListener("load", () => window.scrollTo(0, 0));
+  if ("scrollRestoration" in window.history) {
+    window.history.scrollRestoration = "manual";
+  }
+
+  const scrollHome = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+  window.addEventListener("load", () => {
+    scrollHome();
+    requestAnimationFrame(scrollHome);
+    setTimeout(scrollHome, 100);
+  });
+  window.addEventListener("pageshow", scrollHome);
 }
 
 if (form) {
