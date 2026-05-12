@@ -17,12 +17,15 @@ if (!window.location.hash) {
     window.history.scrollRestoration = "manual";
   }
 
-  const scrollHome = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  const scrollHome = () => window.scrollTo(0, 0);
 
+  scrollHome();
+  window.addEventListener("DOMContentLoaded", scrollHome);
   window.addEventListener("load", () => {
     scrollHome();
     requestAnimationFrame(scrollHome);
     setTimeout(scrollHome, 100);
+    setTimeout(scrollHome, 350);
   });
   window.addEventListener("pageshow", scrollHome);
 }
