@@ -12,14 +12,6 @@ const signupConfig = {
   ...window.FFGP_SIGNUP_CONFIG,
 };
 
-const prepareMailchimpForm = (sourceForm, action) => {
-  const actionUrl = new URL(action);
-
-  sourceForm.action = actionUrl.toString();
-  sourceForm.method = signupConfig.method || "post";
-  sourceForm.target = "_self";
-};
-
 if (!window.location.hash) {
   if ("scrollRestoration" in window.history) {
     window.history.scrollRestoration = "manual";
@@ -55,10 +47,11 @@ if (form) {
   });
 
   if (providerReady) {
-    prepareMailchimpForm(form, signupConfig.action);
+    form.action = signupConfig.action;
+    form.method = signupConfig.method || "post";
   }
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     const volunteer = volunteerCheckbox.checked ? "Yes" : "No";
     const publicName = publicNameCheckbox.checked ? "Yes" : "No";
 
@@ -71,7 +64,14 @@ if (form) {
     }
 
     if (providerReady) {
+      event.preventDefault();
+
       const submitButton = form.querySelector('button[type="submit"]');
+      const formData = new FormData(form);
+      const name = document.querySelector("#name").value.trim();
+      const address = document.querySelector("#address").value.trim();
+      const email = document.querySelector("#email").value.trim();
+      const phone = document.querySelector("#phone").value.trim();
       const parkIdeas = document.querySelector("#parkIdeas").value.trim();
       const parkIdeasWithPermission = [
         parkIdeas,
@@ -79,15 +79,55 @@ if (form) {
         `Public name permission: ${publicName}`,
       ].join("\n");
 
+      formData.set("EMAIL", email);
+      formData.set("MMERGE7", name);
+      formData.set("MMERGE12", address);
+      formData.set("MMERGE8", phone);
+      formData.set("MMERGE9", volunteer);
+      formData.set("MERGE11", parkIdeasWithPermission);
+      formData.set("MMERGE11", parkIdeasWithPermission);
+      formData.set("MERGE10", publicName);
+      formData.set("MMERGE10", publicName);
+      formData.set("PUBLICNAME", publicName);
+
       if (submitButton) {
         submitButton.disabled = true;
       }
 
       if (formStatus) {
-        formStatus.textContent = "Sending your signup to Mailchimp...";
+        formStatus.textContent = "Sending your signup...";
       }
 
-      document.querySelector("#parkIdeas").value = parkIdeasWithPermission;
+      try {
+        await fetch(form.action, {
+          method: form.method || "post",
+          mode: "no-cors",
+          body: new URLSearchParams(formData),
+        });
+
+        form.reset();
+
+        if (volunteerValue) {
+          volunteerValue.value = "No";
+        }
+
+        if (publicNameValue) {
+          publicNameValue.value = "No";
+        }
+
+        if (formStatus) {
+          formStatus.innerHTML = 'Welcome to Friends of Fort Getty Park. <a href="index.html">Back to the top</a>';
+          formStatus.focus();
+        }
+      } catch (error) {
+        if (formStatus) {
+          formStatus.textContent = "Something went wrong. Please try again or email friendsoffortgettypark@gmail.com.";
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+        }
+      }
 
       return;
     }
