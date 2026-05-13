@@ -12,7 +12,7 @@ const signupConfig = {
   ...window.FFGP_SIGNUP_CONFIG,
 };
 
-const submitMailchimpSignup = (action, fields) => {
+const prepareMailchimpForm = (sourceForm, action) => {
   const targetName = "mailchimpSignupFrame";
   const actionUrl = new URL(action);
   let frame = document.querySelector(`iframe[name="${targetName}"]`);
@@ -25,37 +25,30 @@ const submitMailchimpSignup = (action, fields) => {
     document.body.appendChild(frame);
   }
 
-  const mailchimpForm = document.createElement("form");
-  mailchimpForm.action = `${actionUrl.origin}${actionUrl.pathname}`;
-  mailchimpForm.method = "post";
-  mailchimpForm.target = targetName;
-  mailchimpForm.hidden = true;
-
   actionUrl.searchParams.forEach((value, name) => {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
+    let input = sourceForm.querySelector(`input[name="${name}"]`);
+
+    if (!input) {
+      input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      sourceForm.appendChild(input);
+    }
+
     input.value = value;
-    mailchimpForm.appendChild(input);
   });
 
-  const sourceInput = document.createElement("input");
-  sourceInput.type = "hidden";
-  sourceInput.name = "mc_signupsource";
-  sourceInput.value = "hosted";
-  mailchimpForm.appendChild(sourceInput);
-
-  Object.entries(fields).forEach(([name, value]) => {
+  if (!sourceForm.querySelector('input[name="mc_signupsource"]')) {
     const input = document.createElement("input");
     input.type = "hidden";
-    input.name = name;
-    input.value = value;
-    mailchimpForm.appendChild(input);
-  });
+    input.name = "mc_signupsource";
+    input.value = "hosted";
+    sourceForm.appendChild(input);
+  }
 
-  document.body.appendChild(mailchimpForm);
-  mailchimpForm.submit();
-  mailchimpForm.remove();
+  sourceForm.action = `${actionUrl.origin}${actionUrl.pathname}`;
+  sourceForm.method = signupConfig.method || "post";
+  sourceForm.target = targetName;
 };
 
 if (!window.location.hash) {
@@ -93,8 +86,7 @@ if (form) {
   });
 
   if (providerReady) {
-    form.action = signupConfig.action;
-    form.method = signupConfig.method || "post";
+    prepareMailchimpForm(form, signupConfig.action);
   }
 
   form.addEventListener("submit", (event) => {
@@ -110,13 +102,7 @@ if (form) {
     }
 
     if (providerReady) {
-      event.preventDefault();
-
       const submitButton = form.querySelector('button[type="submit"]');
-      const name = document.querySelector("#name").value.trim();
-      const address = document.querySelector("#address").value.trim();
-      const email = document.querySelector("#email").value.trim();
-      const phone = document.querySelector("#phone").value.trim();
       const parkIdeas = document.querySelector("#parkIdeas").value.trim();
       const parkIdeasWithPermission = [
         parkIdeas,
@@ -132,22 +118,7 @@ if (form) {
         formStatus.textContent = "Sending your signup...";
       }
 
-      submitMailchimpSignup(form.action, {
-        MERGE0: email,
-        MERGE7: name,
-        MERGE10: publicName,
-        MERGE9: volunteer,
-        MERGE12: address,
-        MERGE8: phone,
-        MERGE11: parkIdeasWithPermission,
-        EMAIL: email,
-        MMERGE7: name,
-        MMERGE10: publicName,
-        MMERGE9: volunteer,
-        MMERGE12: address,
-        MMERGE8: phone,
-        MMERGE11: parkIdeasWithPermission,
-      });
+      document.querySelector("#parkIdeas").value = parkIdeasWithPermission;
 
       setTimeout(() => {
         form.reset();
