@@ -15,28 +15,7 @@ const signupConfig = {
 const prepareMailchimpForm = (sourceForm, action) => {
   const actionUrl = new URL(action);
 
-  actionUrl.searchParams.forEach((value, name) => {
-    let input = sourceForm.querySelector(`input[name="${name}"]`);
-
-    if (!input) {
-      input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      sourceForm.appendChild(input);
-    }
-
-    input.value = value;
-  });
-
-  if (!sourceForm.querySelector('input[name="mc_signupsource"]')) {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = "mc_signupsource";
-    input.value = "hosted";
-    sourceForm.appendChild(input);
-  }
-
-  sourceForm.action = `${actionUrl.origin}${actionUrl.pathname}`;
+  sourceForm.action = actionUrl.toString();
   sourceForm.method = signupConfig.method || "post";
   sourceForm.target = "_self";
 };
