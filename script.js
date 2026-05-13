@@ -87,11 +87,6 @@ if (form) {
 
   if (providerReady) {
     prepareMailchimpForm(form, signupConfig.action);
-
-    if (publicNameCheckbox && signupConfig.fieldNames.publicName) {
-      publicNameCheckbox.name = signupConfig.fieldNames.publicName;
-      publicNameCheckbox.value = "Yes";
-    }
   }
 
   form.addEventListener("submit", (event) => {
@@ -103,8 +98,7 @@ if (form) {
     }
 
     if (publicNameValue) {
-      publicNameValue.value = "No";
-      publicNameValue.disabled = Boolean(providerReady && publicNameCheckbox.checked);
+      publicNameValue.value = publicName;
     }
 
     if (providerReady) {
@@ -135,7 +129,6 @@ if (form) {
 
         if (publicNameValue) {
           publicNameValue.value = "No";
-          publicNameValue.disabled = false;
         }
 
         if (formStatus) {
