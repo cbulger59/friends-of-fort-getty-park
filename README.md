@@ -29,7 +29,7 @@ To connect Mailchimp, create audience fields for:
 - `ADDRESS`
 - `PHONE`
 - `VOLUNTEER`
-- `PUBLICNAME`
+- `MERGE10` for Public Name
 - `PARKIDEAS`
 
 Keep `EMAIL` as the email field. Then copy the Mailchimp embedded form `action` URL into `signup-config.js`, change `provider` to `mailchimp`, and confirm that the `fieldNames` values match the audience merge tags.

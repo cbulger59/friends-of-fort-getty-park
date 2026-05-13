@@ -36,7 +36,6 @@ if (form) {
   const volunteerValue = document.querySelector("#volunteerValue");
   const publicNameCheckbox = document.querySelector("#publicName");
   const publicNameValue = document.querySelector("#publicNameValue");
-  const publicNameMergeValue = document.querySelector("#publicNameMergeValue");
   const providerReady = signupConfig.provider !== "email" && Boolean(signupConfig.action);
 
   Object.entries(signupConfig.fieldNames || {}).forEach(([field, providerName]) => {
@@ -50,10 +49,9 @@ if (form) {
   if (providerReady) {
     form.action = signupConfig.action;
     form.method = signupConfig.method || "post";
-    form.target = signupConfig.target || "mailchimpSignupFrame";
   }
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     const volunteer = volunteerCheckbox.checked ? "Yes" : "No";
     const publicName = publicNameCheckbox.checked ? "Yes" : "No";
 
@@ -65,16 +63,27 @@ if (form) {
       publicNameValue.value = publicName;
     }
 
-    if (publicNameMergeValue) {
-      publicNameMergeValue.value = publicName;
-    }
-
     if (providerReady) {
-      if (formStatus) {
-        formStatus.innerHTML = 'Welcome to Friends of Fort Getty Park. <a href="index.html">Back to the top</a>';
+      event.preventDefault();
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      const formData = new FormData(form);
+
+      if (submitButton) {
+        submitButton.disabled = true;
       }
 
-      setTimeout(() => {
+      if (formStatus) {
+        formStatus.textContent = "Sending your signup...";
+      }
+
+      try {
+        await fetch(form.action, {
+          method: form.method || "post",
+          mode: "no-cors",
+          body: new URLSearchParams(formData),
+        });
+
         form.reset();
 
         if (volunteerValue) {
@@ -85,10 +94,18 @@ if (form) {
           publicNameValue.value = "No";
         }
 
-        if (publicNameMergeValue) {
-          publicNameMergeValue.value = "No";
+        if (formStatus) {
+          formStatus.innerHTML = 'Welcome to Friends of Fort Getty Park. <a href="index.html">Back to the top</a>';
         }
-      }, 500);
+      } catch (error) {
+        if (formStatus) {
+          formStatus.textContent = "Something went wrong. Please try again or email friendsoffortgettypark@gmail.com.";
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+        }
+      }
 
       return;
     }
