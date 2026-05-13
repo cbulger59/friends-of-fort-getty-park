@@ -36,6 +36,7 @@ if (form) {
   const volunteerValue = document.querySelector("#volunteerValue");
   const publicNameCheckbox = document.querySelector("#publicName");
   const publicNameValue = document.querySelector("#publicNameValue");
+  const publicNameMergeValue = document.querySelector("#publicNameMergeValue");
   const providerReady = signupConfig.provider !== "email" && Boolean(signupConfig.action);
 
   Object.entries(signupConfig.fieldNames || {}).forEach(([field, providerName]) => {
@@ -49,10 +50,7 @@ if (form) {
   if (providerReady) {
     form.action = signupConfig.action;
     form.method = signupConfig.method || "post";
-
-    if (signupConfig.target) {
-      form.target = signupConfig.target;
-    }
+    form.target = signupConfig.target || "mailchimpSignupFrame";
   }
 
   form.addEventListener("submit", (event) => {
@@ -67,9 +65,13 @@ if (form) {
       publicNameValue.value = publicName;
     }
 
+    if (publicNameMergeValue) {
+      publicNameMergeValue.value = publicName;
+    }
+
     if (providerReady) {
       if (formStatus) {
-        formStatus.textContent = "Welcome to Friends of Fort Getty Park.";
+        formStatus.innerHTML = 'Welcome to Friends of Fort Getty Park. <a href="index.html">Back to the top</a>';
       }
 
       setTimeout(() => {
@@ -81,6 +83,10 @@ if (form) {
 
         if (publicNameValue) {
           publicNameValue.value = "No";
+        }
+
+        if (publicNameMergeValue) {
+          publicNameMergeValue.value = "No";
         }
       }, 500);
 
