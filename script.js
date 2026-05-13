@@ -69,6 +69,10 @@ if (form) {
       const submitButton = form.querySelector('button[type="submit"]');
       const formData = new FormData(form);
 
+      formData.set("MERGE10", publicName);
+      formData.set("MMERGE10", publicName);
+      formData.set("PUBLICNAME", publicName);
+
       if (submitButton) {
         submitButton.disabled = true;
       }
@@ -96,6 +100,7 @@ if (form) {
 
         if (formStatus) {
           formStatus.innerHTML = 'Welcome to Friends of Fort Getty Park. <a href="index.html">Back to the top</a>';
+          formStatus.focus();
         }
       } catch (error) {
         if (formStatus) {

@@ -521,6 +521,9 @@ h3 {
 }
 
 .form-status {
+  padding: 13px 14px;
+  border-radius: 8px;
+  background: #eef3ee;
   color: var(--moss);
   font-weight: 750;
 }
