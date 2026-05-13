@@ -520,6 +520,12 @@ h3 {
   font-weight: 750;
 }
 
+.privacy-note {
+  padding-top: 2px;
+  color: #41585c;
+  line-height: 1.45;
+}
+
 .example-note {
   margin-top: -12px;
   color: var(--water);
