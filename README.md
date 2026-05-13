@@ -27,10 +27,11 @@ The current Mailchimp hosted form uses these field names:
 
 - `MERGE0` for Email Address
 - `MERGE7` for Full Name
+- `MERGE13` for Public Permission
 - `MERGE12` for Jamestown Street Address
 - `MERGE8` for Phone
 - `MERGE9` for Volunteer
-- `MERGE10` for Public Name
+- `MERGE10` for Public Name, which is retained in Mailchimp but not used by the website
 - `MERGE11` for Park Ideas
 
 Copy the Mailchimp embedded form `action` URL into `signup-config.js`, change `provider` to `mailchimp`, and confirm that the `fieldNames` values match the hosted form input names.
