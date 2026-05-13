@@ -13,17 +13,7 @@ const signupConfig = {
 };
 
 const prepareMailchimpForm = (sourceForm, action) => {
-  const targetName = "mailchimpSignupFrame";
   const actionUrl = new URL(action);
-  let frame = document.querySelector(`iframe[name="${targetName}"]`);
-
-  if (!frame) {
-    frame = document.createElement("iframe");
-    frame.name = targetName;
-    frame.title = "Mailchimp signup response";
-    frame.hidden = true;
-    document.body.appendChild(frame);
-  }
 
   actionUrl.searchParams.forEach((value, name) => {
     let input = sourceForm.querySelector(`input[name="${name}"]`);
@@ -48,7 +38,7 @@ const prepareMailchimpForm = (sourceForm, action) => {
 
   sourceForm.action = `${actionUrl.origin}${actionUrl.pathname}`;
   sourceForm.method = signupConfig.method || "post";
-  sourceForm.target = targetName;
+  sourceForm.target = "_self";
 };
 
 if (!window.location.hash) {
@@ -115,31 +105,10 @@ if (form) {
       }
 
       if (formStatus) {
-        formStatus.textContent = "Sending your signup...";
+        formStatus.textContent = "Sending your signup to Mailchimp...";
       }
 
       document.querySelector("#parkIdeas").value = parkIdeasWithPermission;
-
-      setTimeout(() => {
-        form.reset();
-
-        if (volunteerValue) {
-          volunteerValue.value = "No";
-        }
-
-        if (publicNameValue) {
-          publicNameValue.value = "No";
-        }
-
-        if (formStatus) {
-          formStatus.innerHTML = 'Welcome to Friends of Fort Getty Park. <a href="index.html">Back to the top</a>';
-          formStatus.focus();
-        }
-
-        if (submitButton) {
-          submitButton.disabled = false;
-        }
-      }, 650);
 
       return;
     }
