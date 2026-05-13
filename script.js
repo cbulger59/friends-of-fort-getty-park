@@ -89,6 +89,9 @@ if (form) {
       formData.set("MERGE10", publicName);
       formData.set("MMERGE10", publicName);
       formData.set("PUBLICNAME", publicName);
+      formData.set("MERGE13", publicName);
+      formData.set("MMERGE13", publicName);
+      formData.set("PUBLICPERMISSION", publicName);
 
       if (submitButton) {
         submitButton.disabled = true;
