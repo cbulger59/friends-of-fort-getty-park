@@ -21,7 +21,7 @@ This is a simple static website for `www.friendsoffortgettypark.com`.
 
 ## Signup provider setup
 
-The site currently falls back to opening an email draft to `hello@friendsoffortgettypark.com`.
+The site currently falls back to opening an email draft to `friendsoffortgettypark@gmail.com`.
 
 To connect Mailchimp, create audience fields for:
 

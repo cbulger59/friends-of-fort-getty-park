@@ -3,7 +3,7 @@ const pressForm = document.querySelector("#pressForm");
 const comparison = document.querySelector("[data-comparison]");
 const signupConfig = {
   provider: "email",
-  mailto: "hello@friendsoffortgettypark.com",
+  mailto: "friendsoffortgettypark@gmail.com",
   pressMailto: "caroline.s.niemczyk@gmail.com",
   action: "",
   method: "post",
