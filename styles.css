@@ -522,10 +522,11 @@ h3 {
 
 .form-status {
   padding: 13px 14px;
+  border: 1px solid rgba(214, 155, 83, 0.46);
   border-radius: 8px;
-  background: #eef3ee;
-  color: var(--moss);
-  font-weight: 750;
+  background: #fff3cf;
+  color: #244a35;
+  font-weight: 850;
 }
 
 .privacy-note {
