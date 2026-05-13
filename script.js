@@ -68,7 +68,18 @@ if (form) {
 
       const submitButton = form.querySelector('button[type="submit"]');
       const formData = new FormData(form);
+      const name = document.querySelector("#name").value.trim();
+      const address = document.querySelector("#address").value.trim();
+      const email = document.querySelector("#email").value.trim();
+      const phone = document.querySelector("#phone").value.trim();
+      const parkIdeas = document.querySelector("#parkIdeas").value.trim();
 
+      formData.set("EMAIL", email);
+      formData.set("MMERGE7", name);
+      formData.set("MMERGE12", address);
+      formData.set("MMERGE8", phone);
+      formData.set("MMERGE9", volunteer);
+      formData.set("MMERGE11", parkIdeas);
       formData.set("MERGE10", publicName);
       formData.set("MMERGE10", publicName);
       formData.set("PUBLICNAME", publicName);

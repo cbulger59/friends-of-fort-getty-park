@@ -23,16 +23,17 @@ This is a simple static website for `www.friendsoffortgettypark.com`.
 
 The site currently falls back to opening an email draft to `friendsoffortgettypark@gmail.com`.
 
-To connect Mailchimp, create audience fields for:
+The current Mailchimp hosted form uses these field names:
 
-- `FULLNAME`
-- `ADDRESS`
-- `PHONE`
-- `VOLUNTEER`
+- `MERGE0` for Email Address
+- `MERGE7` for Full Name
+- `MERGE12` for Jamestown Street Address
+- `MERGE8` for Phone
+- `MERGE9` for Volunteer
 - `MERGE10` for Public Name
-- `PARKIDEAS`
+- `MERGE11` for Park Ideas
 
-Keep `EMAIL` as the email field. Then copy the Mailchimp embedded form `action` URL into `signup-config.js`, change `provider` to `mailchimp`, and confirm that the `fieldNames` values match the audience merge tags.
+Copy the Mailchimp embedded form `action` URL into `signup-config.js`, change `provider` to `mailchimp`, and confirm that the `fieldNames` values match the hosted form input names.
 
 ## Suggested publishing path
 
