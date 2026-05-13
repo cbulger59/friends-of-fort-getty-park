@@ -14,6 +14,7 @@ const signupConfig = {
 
 const submitMailchimpSignup = (action, fields) => {
   const targetName = "mailchimpSignupFrame";
+  const actionUrl = new URL(action);
   let frame = document.querySelector(`iframe[name="${targetName}"]`);
 
   if (!frame) {
@@ -25,10 +26,24 @@ const submitMailchimpSignup = (action, fields) => {
   }
 
   const mailchimpForm = document.createElement("form");
-  mailchimpForm.action = action;
+  mailchimpForm.action = `${actionUrl.origin}${actionUrl.pathname}`;
   mailchimpForm.method = "post";
   mailchimpForm.target = targetName;
   mailchimpForm.hidden = true;
+
+  actionUrl.searchParams.forEach((value, name) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+    mailchimpForm.appendChild(input);
+  });
+
+  const sourceInput = document.createElement("input");
+  sourceInput.type = "hidden";
+  sourceInput.name = "mc_signupsource";
+  sourceInput.value = "hosted";
+  mailchimpForm.appendChild(sourceInput);
 
   Object.entries(fields).forEach(([name, value]) => {
     const input = document.createElement("input");
