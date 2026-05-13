@@ -23,17 +23,17 @@ This is a simple static website for `www.friendsoffortgettypark.com`.
 
 The site currently falls back to opening an email draft to `friendsoffortgettypark@gmail.com`.
 
-The current Mailchimp hosted form uses these field names:
+The current Mailchimp embedded form uses these field names:
 
-- `MERGE0` for Email Address
-- `MERGE7` for Full Name
-- `MERGE12` for Jamestown Street Address
-- `MERGE8` for Phone
-- `MERGE9` for Volunteer
-- `MERGE10` for Public Name
-- `MERGE11` for Park Ideas
+- `EMAIL` for Email Address
+- `MMERGE7` for Full Name
+- `MMERGE12` for Jamestown Street Address
+- `MMERGE8` for Phone
+- `MMERGE11` for Park Ideas
+- `MMERGE9` for Volunteer
+- `MMERGE13` for Public Permission
 
-Copy the Mailchimp embedded form `action` URL into `signup-config.js`, change `provider` to `mailchimp`, and confirm that the `fieldNames` values match the hosted form input names.
+Copy the Mailchimp embedded form `action` URL into `signup-config.js`, change `provider` to `mailchimp`, and confirm that the `fieldNames` values match the embedded form input names.
 
 ## Suggested publishing path
 
